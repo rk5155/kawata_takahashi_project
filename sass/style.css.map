@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "mappings": "AECA,AAAA,gBAAgB,CAAC;EACb,KAAK,EAAE,OAAO;CACjB;;AEFC,AAAD,gBAAQ,CAAC;EACR,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,IAAI;CACb;;AAEA,AACA,cADK,CACL,EAAE,CAAC;EACF,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,QAAQ;CAKzB;;AARD,AAKC,cALI,CACL,EAAE,CAID,EAAE,CAAC;EACF,OAAO,EAAE,IAAI;CACb;;ACbJ,AAAA,OAAO,CAAC;EACN,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,WAAW,EAAE,IAAI;EACjB,cAAc,EAAE,IAAI;EACpB,gBAAgB,EAAE,OAAe;CAelC;;AApBD,AAQE,OARK,CAQL,CAAC,CAAC;EACA,SAAS,EAAE,IAAI;EACf,UAAU,EAAE,KAAK;EACjB,OAAO,EAAE,YAAY;EACrB,WAAW,EAAE,GAAG;CACjB;;AAbH,AAeE,OAfK,CAeL,GAAG,CAAC;EACF,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,GAAG;EACX,aAAa,EAAE,GAAG;CACnB",
+    "sources": [
+        "style.scss",
+        "foundation/_f-reset.scss",
+        "foundation/_f-color.scss",
+        "foundation/_f-function.scss",
+        "layout/_l-header.scss",
+        "layout/_l-main.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

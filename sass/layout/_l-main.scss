@@ -1,0 +1,21 @@
+.l-main {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: hsl(0, 0%, 98%);
+
+
+  p {
+    font-size: 20px;
+    margin-top: 140px;
+    display: inline-block;
+    line-height: 2.8;
+  }
+
+  img {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,46 @@
+.klashkfhoashdos {
+  color: #663399;
+}
+
+.l-header__title {
+  font-size: 30px;
+  padding: 60px;
+}
+
+.l-header__nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.l-header__nav ul li {
+  padding: 16px;
+}
+
+.l-main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #fafafa;
+}
+
+.l-main p {
+  font-size: 20px;
+  margin-top: 140px;
+  display: inline-block;
+  line-height: 2.8;
+}
+
+.l-main img {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=style.css.map */

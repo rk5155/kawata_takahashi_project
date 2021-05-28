@@ -1,0 +1,17 @@
+.l-header {
+	&__title {
+		font-size: 30px;
+		padding: 60px;
+	}
+
+	&__nav {
+		ul {
+			display: flex;
+			justify-content: flex-end;
+
+			li {
+				padding: 16px;
+			}
+		}
+	}
+}
