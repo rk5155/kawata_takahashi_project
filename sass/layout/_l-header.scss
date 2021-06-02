@@ -21,3 +21,17 @@
 	width: 100%;
 	background-color: $sub-color;
 }
+
+#serch_area {
+	display: none;
+	ul {
+		display: flex;
+		flex-flow: wrap;
+		li {
+			width: 25%;
+		}
+	}
+}
+.area_none {
+	display: none;
+}
