@@ -123,4 +123,17 @@ table {
   height: 100px;
   text-align: center;
 }
+
+.search_form {
+  margin: 100px 0;
+}
+
+.search_form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
 /*# sourceMappingURL=style.css.map */

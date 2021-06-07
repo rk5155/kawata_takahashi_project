@@ -12,6 +12,8 @@
     
     <script src="js/ajax2.js"></script>
 
+    <script src="js/search.js"></script>
+
     <link rel="stylesheet" href="sass/style.css">
     
 
@@ -33,17 +35,22 @@
             <div class="search_form">
                 <form action="/form.php" method="post">
                     <div>
-                        <label for="name">名前</label>
-                        <input type="text" id="name" name="name">
+                        <select name="" id="">
+                            <option value="正社員">正社員</option>
+                            <option value="正社員">正社員</option>
+                            <option value="正社員">正社員</option>
+                        </select>
+                    </div>
+                    <div class="search_form__freeword">
+                        <input type="text" id="name" name="">
+                        
                     </div>
                     <div>
-                        <label for="email">メールアドレス</label>
-                        <input type="mail" id="email" name="email">
+                        <input type="mail" id="" name="">
                     </div>
-                    <div>
-                        <label for="message">内容</label>
-                    </div>
-                    <input type="submit" value="送信する">
+
+                    <p class="search_form__btn">検索</p>
+                    <!-- <input type="submit" value="検索"> -->
                 </form>
             </div>
 

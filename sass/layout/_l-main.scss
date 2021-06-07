@@ -24,3 +24,10 @@
     }
   }
 }
+.search_form {
+  margin: 100px 0;
+  form {
+    display: flex;
+    justify-content: space-between;
+  }
+}
