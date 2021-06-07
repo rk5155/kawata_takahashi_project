@@ -34,19 +34,23 @@
         <section id="search">
             <div class="search_form">
                 <form action="/form.php" method="post">
-                    <div>
+                    <div class="search_form__employment">
                         <select name="" id="">
+                            <option value="すべて">すべて</option>
                             <option value="正社員">正社員</option>
-                            <option value="正社員">正社員</option>
-                            <option value="正社員">正社員</option>
+                            <option value="契約社員">契約社員</option>
+                            <option value="派遣社員">派遣社員</option>
+                            <option value="契約社員">契約社員</option>
+                            <option value="業務委託">業務委託</option>
+                            <option value="新卒">新卒</option>
                         </select>
                     </div>
                     <div class="search_form__freeword">
-                        <input type="text" id="name" name="">
+                        <input type="text" id="name" name="" placeholder="職種、業種、働き方など">
                         
                     </div>
-                    <div>
-                        <input type="mail" id="" name="">
+                    <div class="search_form__place">
+                        <input type="mail" id="" name="" placeholder="都道府県、市区町村、駅名">
                     </div>
 
                     <p class="search_form__btn">検索</p>
