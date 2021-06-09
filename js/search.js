@@ -1,17 +1,26 @@
 $(function() {
     $('.search_form__btn').click(function() {
+        console.log(33);
         let freeWord = $(".search_form__freeword input").val();
-        let place = $(".search_form__place input").val();
+        let prefectureName = $(".search_form__place input").val();
         let employment = $(".search_form__employment select option:selected").val();
-        console.log(employment);
+        let municipality = $(".search_form__municipality input").val();
 
-        if (!freeWord) {
-            location.href = `/search_results.html?${place}`;
-        } else if (!place) {
-            location.href = `/search_results.html?${freeWord}`;
-        } else {
-            location.href = `/search_results.html?${freeWord}&${place}&${employment}`;
+        console.log(prefectureName === "");
+        
+
+        prefectureName = prefectureName.replace("県", "").replace("府", "").replace("都", "")
+
+        
+
+        if (prefectureName === "") {
+            alert("都道府県を入力してください")
         }
+        else {
+            location.href = `/search_results.html?${freeWord}&${prefectureName}&${municipality}&${employment}`;
+        }
+
+        
 
 
         

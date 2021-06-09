@@ -62,7 +62,7 @@ $(function() {
         },
         {
           "code": 13,
-          "name": "東京都",
+          "name": "東京",
           "area": "shutoken"
         },
         {
@@ -127,12 +127,12 @@ $(function() {
         },
         {
           "code": 26,
-          "name": "京都府",
+          "name": "京都",
           "area": "kansai"
         },
         {
           "code": 27,
-          "name": "大阪府",
+          "name": "大阪",
           "area": "kansai"
         },
         {
@@ -239,22 +239,19 @@ $(function() {
     
     
     let urlParamStr = window.location.search;
-    
-    
-
-    
-
     let searchWord = decodeURIComponent(urlParamStr.slice(1))
-
     let searchWordList = searchWord.split("&")
-
-    let prefectureName
+    console.log(searchWordList);
     let code
-
     let url
+    let freeWord = searchWordList[0];
+    console.log(freeWord);
+    let prefectureName = searchWordList[1];
+    let municipality = searchWordList[2];
+    let employment = searchWordList[3];
 
     for (let index = 0; index < prefectures.length; index++) {
-        if (searchWordList[1] === prefectures[index].name) {
+        if (prefectureName === prefectures[index].name) {
             prefectureName = prefectures[index].area.toLowerCase();
 
             if (prefectures[index].code < 10) {
@@ -265,50 +262,78 @@ $(function() {
             
         }
     }
-
-    console.log(searchWordList);
-    console.log(code);
+    // https://tenshoku.mynavi.jp/list/kwあああ_kwあああ
 
     $.ajax({
         type: 'GET',
         url: `https://www.land.mlit.go.jp/webland/api/CitySearch?area=${code}`,
       }).done(function (data) {
-  
-        console.log(data);
+        
+        $(data.data).each((i, ele) => {
+            if (ele.name === municipality) {
+                code = ele.id
+            }
+        })
+
+        if (employment === "すべて") {
+            // 全ての検索キーワードがあるとき
+            if (freeWord && prefectureName && municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${freeWord}`
+                console.log(url);
+            }
+            // フリーワードと市町村区が空欄のとき
+            else if (!freeWord && prefectureName && !municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/`
+            }
+            // 市町村区のみ空欄のとき
+            else if (freeWord && prefectureName && !municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}`
+            }
+            else {
+                url = `https://tenshoku.mynavi.jp/list/kw${freeWord}`
+            }
+        }
+        else {
+            // 全ての検索キーワードがあるとき
+            if (freeWord && prefectureName && municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${freeWord}_kw${employment}`
+                console.log(url);
+            }
+            // フリーワードと市町村区が空欄のとき
+            else if (!freeWord && prefectureName && !municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/`
+            }
+            // 市町村区のみ空欄のとき
+            else if (freeWord && prefectureName && !municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}_kw${employment}`
+            }
+            else {
+                url = `https://tenshoku.mynavi.jp/list/kw${freeWord}_kw${employment}`
+            }
+        }
+
+        
+
+        console.log(url);
+        
+        $.ajax({
+            type: 'GET',
+            url: `${url}`,
+          }).done(function (data) {
+            let searchWord = $(data).find('h1').text();
+            $("h1").append(searchWord);
+
+            let result = $(data).find('.js_total_num').text();
+            console.log(result);
+            $("h2").append(result);
+
+            // 取得した一覧から個別のページへの情報を処理.
+            $(data).find('h3').each(function(index, val) {
+              let title = $(val).text();
+              $(".search_results").append(`<p>${title}</p><br>`)
+            });
+          });
+
+
     });
-
-
-
-
-    if (searchWordList[1]) {
-        url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${searchWordList[0]}`
-    } else {
-        url = `https://tenshoku.mynavi.jp/list/kw${searchWordList[0]}`
-    }
-
-    
-    console.log(url);
-    
-
-
-        // スクレイピング
-    $.ajax({
-        type: 'GET',
-        url: `${url}`,
-      }).done(function (data) {
-  
-        // 取得した一覧から個別のページへの情報を処理.
-        $(data).find('h3').each(function(index, val) {
-  
-          let title = $(val).text();
-          
-  
-          $(".search_results").append(`<p>${title}</p><br>`)
-          
-        });
-      });
-
-
-
-   
 });
