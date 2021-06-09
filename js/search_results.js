@@ -289,6 +289,10 @@ $(function() {
             else if (freeWord && prefectureName && !municipality && employment) {
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}`
             }
+            // フリーワードのみ空欄のとき
+            else if(!freeWord && prefectureName && municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}`
+            }
             else {
                 url = `https://tenshoku.mynavi.jp/list/kw${freeWord}`
             }
@@ -306,6 +310,10 @@ $(function() {
             // 市町村区のみ空欄のとき
             else if (freeWord && prefectureName && !municipality && employment) {
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}_kw${employment}`
+            }
+            // フリーワードのみ空欄のとき
+            else if(!freeWord && prefectureName && municipality && employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${employment}`
             }
             else {
                 url = `https://tenshoku.mynavi.jp/list/kw${freeWord}_kw${employment}`
