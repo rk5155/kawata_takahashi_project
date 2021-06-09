@@ -301,7 +301,7 @@ $(function() {
             }
             // フリーワードと市町村区が空欄のとき
             else if (!freeWord && prefectureName && !municipality && employment) {
-                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/`
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${employment}`
             }
             // 市町村区のみ空欄のとき
             else if (freeWord && prefectureName && !municipality && employment) {
