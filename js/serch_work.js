@@ -30,12 +30,13 @@ $(function() {
       }).done(function (data) {
         let municipalities = data.data;
         let municipalitiesNum = municipalities.length;
+        console.log(municipalities);
         
         for (let index = 0; index < municipalitiesNum; index++) {
           let municipalitiesName = municipalities[index].name;
+          let municipalitiesID = municipalities[index].id;
 
-          // let serchAreaLi = `<li><a href="#">${municipalitiesName}</a></li>`
-          let serchAreaLi = `<div class="serch_area__box"><input type="checkbox" name="riyu" value="1">${municipalitiesName}</div>`
+          let serchAreaLi = `<div class="serch_area__box"><input type="checkbox" name="riyu" value="${municipalitiesID}">${municipalitiesName}</div>`
 
           $(".serch_area form").append(serchAreaLi)
           
