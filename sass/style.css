@@ -136,4 +136,24 @@ table {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+
+.serch_work {
+  height: 1200px;
+}
+
+.serch_area {
+  height: 1200px;
+}
+
+.serch_area form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.serch_area .serch_area__box {
+  width: 33%;
+}
 /*# sourceMappingURL=style.css.map */

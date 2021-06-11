@@ -31,3 +31,16 @@
     justify-content: space-between;
   }
 }
+.serch_work {
+  height: 1200px;
+}
+.serch_area {
+  height: 1200px;
+  form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .serch_area__box {
+    width: 33%;
+  }
+}
