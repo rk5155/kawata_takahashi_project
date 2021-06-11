@@ -244,8 +244,12 @@ $(function() {
     console.log(searchWordList);
     let code
     let url
-    let freeWord = searchWordList[0];
+    let freeWord = searchWordList[0].split("　");
     console.log(freeWord);
+    
+    if (freeWord[0] === "") {
+        freeWord = false
+    }
     let prefectureName = searchWordList[1];
     let municipality = searchWordList[2];
     let employment = searchWordList[3];
@@ -264,6 +268,47 @@ $(function() {
     }
     // https://tenshoku.mynavi.jp/list/kwあああ_kwあああ
 
+
+    function freeWords(category, employment) {
+        // フリーワードが一つ以上のとき
+        if (freeWord.length >= 1) {
+            let keyWord = ""
+            
+            for (let index = 0; index < freeWord.length; index++) {
+                if (index === 0) {
+                    keyWord += `kw${freeWord[index]}`
+                } else {
+                    keyWord += `_kw${freeWord[index]}`
+                }
+            }
+
+            // 雇用形態があったら
+            if (employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/${category}${code}/${keyWord}_kw${employment}`
+            } else {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/${category}${code}/${keyWord}`
+            }
+        }
+        else {
+            // 雇用形態があったら
+            if (employment) {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/${category}${code}/${keyWord}_kw${employment}`
+            } else {
+                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/${category}${code}/${keyWord}`
+            }
+        }
+    }
+
+    // 全ての検索キーワードがあるとき
+    let keyword1 = freeWord && prefectureName && municipality && employment
+    // フリーワードと市町村区が空欄のとき
+    let keyword2 = !freeWord && prefectureName && !municipality && employment
+    // 市町村区のみ空欄のとき
+    let keyword3 = freeWord && prefectureName && !municipality && employment
+    // フリーワードのみ空欄のとき
+    let keyword4 = !freeWord && prefectureName && municipality && employment
+
+
     $.ajax({
         type: 'GET',
         url: `https://www.land.mlit.go.jp/webland/api/CitySearch?area=${code}`,
@@ -276,43 +321,36 @@ $(function() {
         })
 
         if (employment === "すべて") {
-            // 全ての検索キーワードがあるとき
-            if (freeWord && prefectureName && municipality && employment) {
-                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${freeWord}`
-                console.log(url);
+            if (keyword1) {
+                freeWords("c");
             }
-            // フリーワードと市町村区が空欄のとき
-            else if (!freeWord && prefectureName && !municipality && employment) {
+            else if (keyword2) {
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/`
             }
-            // 市町村区のみ空欄のとき
-            else if (freeWord && prefectureName && !municipality && employment) {
-                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}`
+            else if (keyword3) {
+                freeWords("p");
             }
-            // フリーワードのみ空欄のとき
-            else if(!freeWord && prefectureName && municipality && employment) {
+            else if(keyword4) {
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}`
             }
             else {
                 url = `https://tenshoku.mynavi.jp/list/kw${freeWord}`
             }
         }
+        // すべて以外を選択したとき
         else {
-            // 全ての検索キーワードがあるとき
-            if (freeWord && prefectureName && municipality && employment) {
-                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${freeWord}_kw${employment}`
-                console.log(url);
+            if (keyword1) {
+                freeWords("c", employment)
             }
-            // フリーワードと市町村区が空欄のとき
-            else if (!freeWord && prefectureName && !municipality && employment) {
+            else if (keyword2) {
+                // フリーワードが2つ以上のとき
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${employment}`
             }
-            // 市町村区のみ空欄のとき
-            else if (freeWord && prefectureName && !municipality && employment) {
-                url = `https://tenshoku.mynavi.jp/${prefectureName}/list/p${code}/kw${freeWord}_kw${employment}`
+            else if (keyword3) {
+                // フリーワードが2つ以上のとき
+                freeWords("p");
             }
-            // フリーワードのみ空欄のとき
-            else if(!freeWord && prefectureName && municipality && employment) {
+            else if(keyword4) {
                 url = `https://tenshoku.mynavi.jp/${prefectureName}/list/c${code}/kw${employment}`
             }
             else {
@@ -323,7 +361,7 @@ $(function() {
         
 
         console.log(url);
-        
+        // マイナビをスクレイピング
         $.ajax({
             type: 'GET',
             url: `${url}`,
@@ -332,7 +370,6 @@ $(function() {
             $("h1").append(searchWord);
 
             let result = $(data).find('.js_total_num').text();
-            console.log(result);
             $("h2").append(result);
 
             // 取得した一覧から個別のページへの情報を処理.
